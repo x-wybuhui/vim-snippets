@@ -1,37 +1,343 @@
 #version 1
 #PREAMBLE
-#documentclass without options
-snippet dcl \documentclass{}
-	\\documentclass{${1:class}} ${0}
-#documentclass with options
-snippet dclo \documentclass[]{}
-	\\documentclass[${1:options}]{${2:class}} ${0}
+#newcommand
+snippet dc
+	\\documentclass[${1:10pt, a4paper}]{${2:article}}
 
-snippet tmplt "Template"
-	\\documentclass{${1:article}}
-
-	\\usepackage{import}
-	\\usepackage{pdfpages}
-	\\usepackage{transparent}
-	\\usepackage{xcolor}
-	$2
+	\\usepackage{geometry}
+	\\usepackage{hyperref}
+	\\usepackage{fancyhdr}
+	\\usepackage[UTF8]{ctex}
+	%\\usepackage{graphicx}
+	%\\usepackage{fontspec}
 	
-	\\newcommand{\incfig}[2][1]{%
-		    \def\svgwidth{#1\columnwidth}
-		    \import{./figures/}{#2.pdf_tex}
+	\\hypersetup{
+		colorlinks=true,
+		linkcolor=blue,
+		filecolor=magenta,
+		urlcolor=cyan,
 	}
-	$3
-	\\pdfsuppresswarningpagegroup=1
-	
+
+	%\\setsansfont{JetBrainsMono}[
+		%Path=./font/,
+		%Scale=0.85,
+		%Extension = .ttf,
+		%UprightFont=*-Regular,
+		%BoldFont=*-Bold,
+		%ItalicFont=*-Italic,
+		%BoldItalicFont=*-BoldItalic
+		%]
+
+
+	\\title{\\texttt{${3:wybuhui}}}
+	\\author{${4:wybuhui} \\\\${5:wybuhui@linuxstory.org} }
+	\\pagestyle{fancy}
+	\\lhead{${4:wybuhui}}
+	\\rhead{\\rightmark}
+	\\cfoot{Page \\thepage}
+
+	\\geometry{left=3.0cm, right=3.0cm, bottom=3.0cm}
 	\\begin{document}
-		    $0
+	\\kaishu
+	%\\sffamily
+	\\maketitle
+	\\thispagestyle{empty}
+	\\pagebreak
+	\\tableofcontents
+	\\thispagestyle{empty}
+	\\setcounter{page}{0}
+	\\pagebreak
+		${0}
 	\\end{document}
 
-#newcommand
+
+snippet beamer 
+	\\documentclass{beamer}
+	\\usepackage[UTF8]{ctex} 
+	\\usepackage{indentfirst} 
+	\\usepackage{graphicx} 
+	\\usepackage{subcaption} 
+
+
+	\\usetheme{Szeged}
+	\\usecolortheme{beaver}
+	\\usefonttheme{professionalfonts}
+
+
+	\\title{${1}}
+	\\author{${2}}
+	\\institute{${3}}
+	\\date{`strftime("%Y-%m-%d")`}
+
+
+	\\begin{document}
+	\\frame{\\titlepage}
+
+	\\begin{frame}
+		\\kaishu
+		\\frametitle{${4}}
+		\\setlength{\\parindent}{2em}
+
+		\\begin{enumerate}
+			\\item ${5}
+		\\end{enumerate}
+		
+	\\end{frame}
+
+	\\end{document}
+
+
+
+
+snippet sdc 
+	\\documentclass[${1}]{subfiles}
+
+	\\usepackage{geometry}
+	\\usepackage{hyperref}
+	\\usepackage{fancyhdr}
+	\\usepackage[UTF8]{ctex}
+	
+	\\hypersetup{
+		colorlinks=true,
+		linkcolor=blue,
+		filecolor=magenta,
+		urlcolor=cyan,
+	}
+	
+	\\pagestyle{fancy}
+	\\lhead{${2:wybuhui}}
+	\\rhead{\\rightmark}
+	\\cfoot{Page \\thepage}
+
+	\\geometry{left=3.0cm, right=3.0cm, bottom=3.0cm}
+	\\begin{document}
+	\\kaishu
+		${0}
+	\\end{document}
+
+snippet arc
+	\\makeatletter
+	\\providecommand\\@gobblethree[3]{}
+	\\patchcmd{\\over@under@arc}
+	{\\@gobbletwo}
+	{\\@gobblethree}
+	{}{}
+	\\makeatother
+
+snippet rbr
+	$\\left.\\begin{aligned}
+		${0}
+	\\end{aligned}\\right\\rbrace$
+
+
+snippet mop
+	\\mathop{${1}}\\limits_{${2}}${0}
+
+snippet appr
+	\\approx ${0}
+
+snippet iff
+	\\iff ${0}
+
+snippet lrarr
+	\\leftrightarrow ${0}
+
+snippet mu
+	\\mu ${0}
+
+snippet eqv
+	\\equiv ${0}
+
+
+snippet tau
+	\\tau ${0}
+
+snippet to
+	\\to ${0}
+
+snippet cdot
+	\\cdot ${0}
+
+snippet cdots
+	\\cdots ${0}
+
+snippet vdot
+	\\vdot ${0}
+
+snippet vdots
+	\\vdots ${0}
+
+snippet sim
+	\\sim ${0}
+
+snippet nind 
+	\\noindent ${0}
+
+snippet ind 
+	\\indent ${0}
+
+snippet parti
+	\\partial${0}
+
+snippet text
+	\\text{${1}} ${0}
+
+snippet ttc
+	\\textcolor{${1}}{${2}} ${0}
+snippet aind
+	\\\\indent ${0}
+	
+snippet mt
+	\$ ${1} \$ ${0} 
+
+snippet mta
+	\$ ${0}\$
+
+snippet sqr
+	\\sqrt{${1}} ${0}
+
+snippet psi
+	\\psi ${0}
+
+snippet bu 
+	\\bigcup ${0}
+
+snippet veps
+	\\varepsilon ${0}
+
+snippet bua
+	\\bigcup\\limits_{${1:i=1}}^${2:\\infty} ${0}
+
+snippet bn 
+	\\bigcap ${0}
+
+snippet bna
+	\\bigcap\\limits_{${1:i=1}}^${2:\\infty} ${0}
+
+snippet pi
+	\\pi ${0}
+
+snippet square
+	\\square ${0}
+
+snippet trig
+	\\triangle ${0}
+
+snippet ap
+	\\alpha ${0}
+
+snippet bt
+	\\beta ${0}
+
+snippet dt 
+	\\delta ${0}
+
+snippet dta
+	\\Delta ${0}
+
+snippet vphi
+	\\varphi${0}
+
+snippet phi
+	\\phi${0}
+	
+snippet ep
+	\\emptyset ${0}
+
+snippet eta
+	\\eta ${0}
+
+snippet gam
+	\\gamma ${0}
+
+snippet lbd
+	\\lambda ${0}
+
+snippet Lbd
+	\\Lambda ${0}
+
+snippet ne 
+	\\neq ${0}
+
+snippet ge
+	\\ge ${0}
+
+snippet le
+	\\le ${0}
+
+snippet gg
+	\\gg ${0}
+
+snippet in 
+	\\in ${0}
+
+snippet nin
+	\\notin ${0}
+
+snippet pm
+	\\pm ${0}
+
+snippet Omg
+	\\Omega ${0}
+
+snippet omg 
+	\\omega ${0}
+
+snippet theta
+	\\theta ${0}
+
+snippet sig
+	\\sigma ${0}
+
+snippet int
+	\\int ${0}
+
+snippet inta
+	\\int_{${1}}^{${2}}${0}
+
+snippet oint
+	\\oint ${0}
+
+snippet cb
+	{${1}} ${0}
+
+snippet lbr
+	\\lbrace ${0}
+
+snippet bar
+	\\bar ${0}
+
+snippet vec 
+	\\vec ${0}
+
+snippet otm
+	\\otimes ${0}
+
+snippet x
+	\\times ${0}
+
+snippet wh
+	\\widehat ${0}
+
+snippet sl
+	\\${0}
+
+snippet dr
+	\\draw[${1}] ${0}
+
+snippet nd
+	\\node ${0}
+	
+snippet	df
+	\\define${1:color} {${2}} ${0}
+
 snippet nc \newcommand
 	\\newcommand{\\${1:cmd}}[${2:opt}]{${3:realcmd}} ${0}
 #usepackage
 snippet up \usepackage
+	\\usepackage{${1:package}} ${0}
+
+snippet upa
 	\\usepackage[${1:options}]{${2:package}} ${0}
 #newunicodechar
 snippet nuc \newunicodechar
@@ -42,20 +348,32 @@ snippet dmo \DeclareMathOperator
 
 #DOCUMENT
 # \begin{}...\end{}
+snippet bega
+	\\begin{${1:env}}{${2:para}}
+		${0:${VISUAL}}
+	\\end{$1}
+
+
+
 snippet begin \begin{} ... \end{} block
 	\\begin{${1:env}}
 		${0:${VISUAL}}
 	\\end{$1}
 
-# Maketitle
-snippet mkt maketitle
-	\\maketitle
-	
+snippet bgroup
+	\begingroup 
+	${1}
+	\endgroup
+	${0}
+
 # Tabular
 snippet tab tabular (or arbitrary) environment
-	\\begin{${1:tabular}}{${2:c}}
-		${0:${VISUAL}}
-	\\end{$1}
+	\\begin{center}
+		\\begin{${1:tabular}}[ht]{${2}}
+			${0}
+		\\end{$1}
+	\\end{center}
+
 snippet thm thm (or arbitrary) environment with optional argument
 	\\begin[${1:author}]{${2:thm}}
 		${0:${VISUAL}}
@@ -67,7 +385,6 @@ snippet center center environment
 # Align(ed)
 snippet ali align(ed) environment
 	\\begin{align${1:ed}}
-		\\label{eq:${2}}
 		${0:${VISUAL}}
 	\\end{align$1}
 # Gather(ed)
@@ -83,8 +400,8 @@ snippet eq equation environment
 # Equation
 snippet eql Labeled equation environment
 	\\begin{equation}
-		\\label{eq:${2}}
-		${0:${VISUAL}}
+		\\label{eq:${1}}
+	${0:${VISUAL}}
 	\\end{equation}
 # Equation
 snippet eq* unnumbered equation environment
@@ -134,14 +451,14 @@ snippet ]i \item (recursive)
 	\\item ${1}
 		${0:]i}
 # Matrix
-snippet mat smart matrix environment
-	\\begin{${1:p/b/v/V/B/small}matrix}
-		${0:${VISUAL}}
-	\\end{$1matrix}
+snippet mat 
+	\begin{${1:v}matrix}
+		${0}
+	\end{$1matrix}
 # Cases
 snippet cas cases environment
 	\\begin{cases}
-		${1:equation}, &\\text{ if }${2:case}\\
+		${1:equation}, &${2:case}\\\
 		${0:${VISUAL}}
 	\\end{cases}
 # Split
@@ -192,22 +509,12 @@ snippet ssub* \subsubsection*
 	${0}
 # Paragraph
 snippet par \paragraph
-	\\paragraph{${1:paragraph name}}%
-	\\label{par:${2:$1}}
-	${0}
-# Paragraph*
-snippet par* \paragraph*
-	\\paragraph*{${1:paragraph name}}%
-	\\label{par:${2:$1}}
+	\\paragraph
+	\\noindent
 	${0}
 # Sub Paragraph
 snippet subp \subparagraph
 	\\subparagraph{${1:subparagraph name}}%
-	\\label{subp:${2:$1}}
-	${0}
-# Sub Paragraph*
-snippet subp* \subparagraph*
-	\\subparagraph*{${1:subparagraph name}}%
 	\\label{subp:${2:$1}}
 	${0}
 snippet ni \noindent
@@ -216,16 +523,19 @@ snippet ni \noindent
 #References
 snippet itd description \item
 	\\item[${1:description}] ${0:item}
+
+snippet ref 
+	\ref{${1:fig|tab|list|eq|sec}} ${0}
 snippet figure reference to a figure
-	${1:Figure}~\\ref{${2:fig:}}
+	${1:Figure} ~\\ref{${2:fig:}}
 snippet table reference to a table
-	${1:Table}~\\ref{${2:tab:}}
+	${1:Table} ~\\ref{tab:${2:test}}
 snippet listing reference to a listing
-	${1:Listing}~\\ref{${2:list}}
+	${1:Listing} ~\\ref{list:${2:test}}
 snippet section reference to a section
-	${1:Section}~\\ref{sec:${2}} ${0}
+	${1:Section} ~\\ref{sec:${2}} ${0}
 snippet page reference to a page
-	${1:page}~\\pageref{${2}} ${0}
+	${1:page} ~\\pageref{${2}} ${0}
 snippet index \index
 	\\index{${1:index}} ${0}
 #Citations
@@ -246,58 +556,94 @@ snippet fcite \footcite[]{}
 	\\footcite[${1}]{${2}}${0}
 #Formating text: italic, bold, underline, small capital, emphase ..
 snippet ita italic text
-	\\textit{${1:${VISUAL:text}}}${0}
+	\\textit{${1:${VISUAL:text}} ${0}
 snippet bf bold face text
-	\\textbf{${1:${VISUAL:text}}}${0}
+	\\textbf{${1:${VISUAL:text}} ${0}
 snippet under underline text
-	\\underline{${1:${VISUAL:text}}}${0}
+	\\underline{${1:${VISUAL:text}} ${0}
 snippet over overline text
-	\\overline{${1:${VISUAL:text}}}${0}
+	\\overline{${1:${VISUAL:text}} ${0}
 snippet emp emphasize text
-	\\emph{${1:${VISUAL:text}}}${0}
+	\\emph{${1:${VISUAL:text}}${0}
 snippet sc small caps text
-	\\textsc{${1:${VISUAL:text}}}${0}
+	\\textsc{${1:${VISUAL:text}} ${0}
 #Choosing font
 snippet sf sans serife text
-	\\textsf{${1:${VISUAL:text}}}${0}
+	\\textsf{${1:${VISUAL:text}} ${0}
 snippet rm roman font text
-	\\textrm{${1:${VISUAL:text}}}${0}
+	\\textrm{${1:${VISUAL:text}} ${0}
 snippet tt typewriter (monospace) text
-	\\texttt{${1:${VISUAL:text}}}${0}
-snippet tsub subscripted text
-	\\textsubscript{${1:${VISUAL:text}}}${0}
-snippet tsup superscripted text
-	\\textsuperscript{${1:${VISUAL:text}}}${0}
+	\\texttt{${1:${VISUAL:text}} ${0}
 #Math font
 snippet mf mathfrak
-	\\mathfrak{${1:${VISUAL:text}}}${0}
+	\\mathfrak{${1:${VISUAL:text}} ${0}
 snippet mc mathcal
-	\\mathcal{${1:${VISUAL:text}}}${0}
+	\\mathcal{${1:${VISUAL:text}} ${0}
 snippet ms mathscr
-	\\mathscr{${1:${VISUAL:text}}}${0}
+	\\mathscr{${1:${VISUAL:text}} ${0}
 #misc
 snippet ft \footnote
-	\\footnote{${1:${VISUAL:text}}}${0}
-snippet fig figure environment (includegraphics)
+	\\footnote[${1}]{${2:${VISUAL:text}}${0} 
+
+snippet fig
 	\\begin{figure}
 	\\begin{center}
-		\\includegraphics[scale=${1}]{Figures/${2}}
+		${0}
 	\\end{center}
-	\\caption{${3}}
-	\\label{fig:${4}}
+	\\caption{${1}}
+	\\label{fig:${2}}
+	\\end{figure}
+
+snippet figp figure environment (includegraphics)
+	\\begin{figure}[h]
+		\\centering
+		\\includegraphics[scale=${1}]{Figures/${2}}
+		\\caption{${3}}
+		\\label{fig:${4}}
 	\\end{figure}
 	${0}
+
+snippet incg
+	\\includegraphics[scale=${1}]{${2}}
+
 snippet tikz figure environment (tikzpicture)
-	\\begin{figure}[htpb]
+	\\begin{figure}[ht]
 	\\begin{center}
 	\\begin{tikzpicture}[scale=${1:1}, transform shape]
-		${2}
+		${0}
 	\\end{tikzpicture}
 	\\end{center}
-	\\caption{${3}}%
-	\\label{fig:${4}}
+	\\caption{${2}}
+	\\label{fig:${3}}
 	\\end{figure}
-	${0}
+
+snippet func
+	\\begin{figure}[ht]
+	\\begin{center}
+	\\begin{tikzpicture}[scale=1, transform shape]
+	\\begin{axis}[
+		title=\text{${1}},
+		axis x line=middle,
+		axis y line=middle,
+		xmin=${2}, xmax=${3},
+		ymin=${4}, ymax=${5},
+		xlabel=$${6:x}$,
+		ylabel=$${7:y}$,
+	]
+
+	\\addplot[
+		red,
+		thick,
+		domain=${8},
+		samples=${9},
+	]
+		{${0}};
+
+	\\end{axis}
+	\\end{tikzpicture}
+	\\end{center}
+	\\end{figure}
+
 snippet subfig subfigure environment
 	\\begin{subfigure}[${1}]{${2:\\textwidth}}
 	\\begin{center}
@@ -322,18 +668,21 @@ snippet tikzcd* tikzcd environment in equation*
 	\\end{equation*}
 	${0}
 #math
-snippet stackrel \stackrel{}{}
-	\\stackrel{${1:above}}{${2:below}} ${0}
-snippet frac \frac{}{}
+snippet srel \stackrel{}{}
+	\\stackrel{${1:above}}{${2:=\joinrel=}} ${0}
+snippet // \frac{}{}
 	\\frac{${1:num}}{${2:denom}} ${0}
-snippet sum \sum^{}_{}
-	\\sum^{${1:n}}_{${2:i=1}} ${0}
-snippet lim \lim_{}
-	\\lim_{${1:n \\to \\infty}} ${0}
+snippet sum \sum\limits_{}^{}
+	\\sum\limits_{${1:n=1}}^{${2:\infty}} ${0}
+snippet lim 
+	\\lim ${0}
+snippet lima 
+	\\lim\limits_{${1:n \\to \\infty}} ${0}
 snippet frame frame environment
-	\\begin{frame}[${1:t}]
-		\frametitle{${2:title}}
-		\framesubtitle{${3:subtitle}}
+	\\begin{frame}[${1:t}]{${2:title}}
+		\\kaishu
+		\\frametitle{${3}}
+		\\setlength{\\parindent}{2em}
 		${0:${VISUAL}}
 	\\end{frame}
 snippet block block environment
@@ -382,9 +731,9 @@ snippet lra langle rangle
 	\\langle ${0:${VISUAL}} \\rangle
 # Code listings
 snippet lst
-	\\begin{listing}[language=${1:language}]
+	\\begin{lstlisting}[language=${1:language}]
 		${0:${VISUAL}}
-	\\end{listing}
+	\\end{lstlisting}
 snippet lsi
 	\\lstinline|${1}| ${0}
 # Hyperlinks
@@ -400,48 +749,135 @@ snippet hrefc
 # enquote from package csquotes
 snippet enq enquote
 	\\enquote{${1:${VISUAL:text}}} ${0}
-# Time derivative
-snippet ddt time derivative
-	\\frac{d}{dt} {$1} {$0}
-# Limit
-snippet lim limit
-	\\lim_{{$1}} {{$2}} {$0}
-# Partial derivative
-snippet pdv partial derivation
-	\\frac{\\partial {$1}}{\\partial {$2}} {$0}
-# Second order partial derivative
-snippet ppdv second partial derivation
-	\\frac{\\partial^2 {$1}}{\\partial {$2} \\partial {$3}} {$0}
-# Ordinary derivative
-snippet dv derivative
-	\\frac{d {$1}}{d {$2}} {$0}
-# Summation
-snippet summ summation
-	\\sum_{{$1}} {$0}
-# Shorthand for time derivative
-snippet dot dot
-	\\dot{{$1}} {$0}
-# Shorthand for second order time derivative
-snippet ddot ddot
-	\\ddot{{$1}} {$0}
-# Vector
-snippet vec vector
-	\\vec{{$1}} {$0}
-# Bar
-snippet bar bar
-	\\bar{{$1}} {$0}
-# Cross product
-snippet \x cross product
-	\\times {$0}
-# Dot product
-snippet . dot product
-	\\cdot {$0}
-# Integral
-snippet int integral
-	\\int_{{$1}}^{{$2}} {$3} \\: d{$4} {$0}
-# Right arrow
-snippet ra rightarrow
-	\\rightarrow {$0}
-# Long right arrow
-snippet lra longrightarrow
-	\\longrightarrow {$0}
+
+snippet head
+	\\pagestyle{myheadings}
+	\\markright{ ${1:wybuhui} }
+snippet psty
+	\\thispagestyle{${1:empty}}
+snippet scou
+	\\setcounter{page}{${1:0}}
+snippet lstyle
+	\\definecolor {backcolor} {rgb} { 0.95, 0.95, 0.92 }
+	\\definecolor {codegray}  {rgb} { 0.5, 0.5, 0.5 }
+	\\definecolor {codegreen} {HTML} { AEAEAE }
+	\\definecolor {codepurple}{HTML} { 62D04E }
+	\\definecolor {codekey}	 {HTML} { F8D734 }
+
+	\\lstdefinestyle{ ${1:mystyle} }{
+		backgroundcolor=\\color{backcolor},
+		commentstyle=\\color{codegreen},
+		keywordstyle=\\color{codekey},
+		numberstyle=\\tiny\\color{codegray},
+		stringstyle=\\color{codepurple},
+		basicstyle=\\ttfamily,
+		breakatwhitespace=false,
+		breaklines=true,
+		captionpos=b,
+		keepspaces=true,
+		numbers=left,
+		numbersep=5pt,
+		showspaces=false,
+		showstringspaces=false,
+		showtabs=false,
+		tabsize=2
+	}
+	\\lstset{ style=$1 }
+
+snippet tb
+	\\begin{center}
+		\\begin{tabular}{ ${4:ccc} }
+			\\hline
+			\\multicolumn{${1:3}}{${2:c}}{${3:text}} \\\\
+			\\hline
+			${5}	\\\\
+			\\hline
+			${5}	\\\\
+			\\hline
+		\\end{tabular}
+	\\end{center}
+	${0}
+
+snippet ltab
+	\\begingroup
+	\\setlength{\\LTleft}{-20cm plus -1fill}
+	\\setlength{\\LTright}{\\LTleft}
+	\\begin{longtable}{${1:ccc}}
+		\\caption{${2:longtable}}	\\\\
+		\\hline
+		${4:test & test & test} 	\\\\
+		\\endfirsthead
+		${5: head in every page}
+		\\endhead
+		\\endfoot
+		${0:table content}
+
+		\\hline
+	\\end{longtable}
+	\\endgroup
+
+snippet mr
+	\\midrule
+	${0}	\\\\
+
+snippet tr 
+	\\toprule
+	${0} 	\\\\
+
+snippet br 
+	\\bottomrule
+
+snippet pb
+	\\pagebreak ${0}
+
+snippet lb
+	\\\\ 
+	\\indent ${0}
+
+snippet box
+	\\fbox{ ${1} } ${0}
+
+snippet ftm
+	\\footnotemark[ ${1:1} ] ${0}
+
+snippet mrow
+	\\multirow{${1:rows}}{${2:length}}{${3:text}} ${0}
+
+snippet mcol
+	\\multicolumn{${1:columns}}{${2:position}}{${3:text}} ${0}
+
+snippet linput
+	\\lstinputlisting[language=${1:c}]{${2:filename}} ${0}
+snippet lmin
+	\\begin{minted}[bgcolor=mint_bg,linenos,frame=lines,style=native]{${1}}
+	${0}
+	\\end{minted}
+snippet minbg
+	\\definecolor{mint_bg}{HTML}{272822}
+snippet bs
+	\\backslash ${0}
+
+snippet hl
+	\\hline
+	${0}
+
+snippet rcol
+	\\rowcolor{${1:color}} ${0}
+
+snippet ccol
+	\\cellcolor{${1:cellcolor}} ${0}
+
+snippet inf
+	\\infty ${0}
+
+snippet hset
+	\\hypersetup{
+		colorlinks=true,
+		linkcolor=${1:blue},
+		filecolor=${2:magenta},
+		urlcolor=${3:cyan},
+	}
+snippet mint
+	\\mint[bgcolor=mint_bg,linenos,frame=lines,style=native]{${1:c}}|${0}|
+snippet inpmin
+	\\inputminted[bgcolor=mint_bg,linenos,frame=lines,style=native]{${1:c}}{${2:file}}${0}

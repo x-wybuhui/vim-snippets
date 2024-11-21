@@ -1,4 +1,17 @@
 # Shebang
+
+snippet info 
+	if [ $# -lt ${1:2} ]; then
+		echo -e "\033[31m \n\n\t\tScript designed by wybuhui.\n\033[0m"
+		printf "Usage: sh \$0 ${2:[src]} \n"
+		exit
+	fi
+
+snippet ech 
+	echo -e "\033[31m ${1} \033[0m"
+	${0}
+	
+
 snippet #!
 	#!/bin/sh
 
