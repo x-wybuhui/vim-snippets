@@ -849,7 +849,7 @@ snippet mcol
 snippet linput
 	\\lstinputlisting[language=${1:c}]{${2:filename}} ${0}
 snippet lmin
-	\\begin{minted}[bgcolor=mint_bg,linenos,frame=lines,style=native]{${1}}
+	\\begin{minted}[bgcolor=mint_bg,linenos,breaklines,breakanywhere,frame=lines,style=native]{${1}}
 	${0}
 	\\end{minted}
 snippet minbg
@@ -878,6 +878,6 @@ snippet hset
 		urlcolor=${3:cyan},
 	}
 snippet mint
-	\\mint[bgcolor=mint_bg,linenos,frame=lines,style=native]{${1:c}}|${0}|
+	\\mint[bgcolor=mint_bg,linenos,breaklines,breakanywhere,frame=lines,style=native]{${1:c}}|${0}|
 snippet inpmin
-	\\inputminted[bgcolor=mint_bg,linenos,frame=lines,style=native]{${1:c}}{${2:file}}${0}
+	\\inputminted[bgcolor=mint_bg,linenos,breaklines,breakanywhere,frame=lines,style=native]{${1:c}}{${2:file}}${0}
