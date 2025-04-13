@@ -3,21 +3,29 @@
 #newcommand
 snippet dc
 	\\documentclass[${1:10pt, a4paper}]{${2:article}}
+	\\newcounter{FilePrg}
 
 	\\usepackage{geometry}
 	\\usepackage{hyperref}
 	\\usepackage{fancyhdr}
-	\\usepackage[UTF8]{ctex}
+	\\usepackage{xcolor}
+	\\usepackage{minted}
+	\\usepackage{fontspec}
+	\\usepackage{tcolorbox}
+	%\\usepackage[UTF8]{ctex}
 	%\\usepackage{graphicx}
-	%\\usepackage{fontspec}
 	
+	\\tcbuselibrary{listings,minted,breakable}
+
+	\\definecolor{MintBg}{HTML}{fdf6e3}
+
+
 	\\hypersetup{
 		colorlinks=true,
 		linkcolor=blue,
 		filecolor=magenta,
 		urlcolor=cyan,
 	}
-
 	%\\setsansfont{JetBrainsMono}[
 		%Path=./font/,
 		%Scale=0.85,
@@ -27,6 +35,32 @@ snippet dc
 		%ItalicFont=*-Italic,
 		%BoldItalicFont=*-BoldItalic
 		%]
+	\\newtcblisting{TerminalCode}[2][bash]{
+		listing only,
+		listing engine=minted,
+		minted language={#1},
+		minted options={linenos,breaklines,breakanywhere},
+		colback=MintBg,
+		colframe=yellow!50!black,
+		title={#2},left=10mm,
+		fonttitle=\\bfseries,breakable,
+	}
+	%style=solarized-light,
+	\\newtcbinputlisting[use counter=FilePrg, number format=\arabic]{\TerminalFileCode}[3]{
+		listing only,
+		listing engine=minted,
+		listing file={#1},
+		minted language={#2},
+		minted options={linenos,breaklines,breakanywhere},
+		colback=MintBg,
+		colframe=yellow!50!black,
+		title={#3},left=10mm,
+		fonttitle=\\bfseries,breakable,
+		label=filePrg:#3
+	}
+
+
+
 
 
 	\\title{\\texttt{${3:wybuhui}}}
@@ -38,7 +72,7 @@ snippet dc
 
 	\\geometry{left=3.0cm, right=3.0cm, bottom=3.0cm}
 	\\begin{document}
-	\\kaishu
+	%\\kaishu
 	%\\sffamily
 	\\maketitle
 	\\thispagestyle{empty}
@@ -853,7 +887,7 @@ snippet lmin
 	${0}
 	\\end{minted}
 snippet minbg
-	\\definecolor{mint_bg}{HTML}{272822}
+	\\definecolor{MintBg}{HTML}{fdf6e3}
 snippet bs
 	\\backslash ${0}
 
