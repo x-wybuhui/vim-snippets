@@ -3,7 +3,6 @@
 #newcommand
 snippet dc
 	\\documentclass[${1:10pt, a4paper}]{${2:article}}
-	\\newcounter{FilePrg}
 
 	\\usepackage{geometry}
 	\\usepackage{hyperref}
@@ -54,15 +53,6 @@ snippet dc
 			showstringspaces=false,
 			numbers=left,
 			numbersep=5pt,
-			%moreemph={
-				%void,
-				%int,
-				%char,
-				%long,
-				%short,
-				%float,
-				%double
-			%},
 			backgroundcolor=\\color{CodeBg},
 			commentstyle=\\color{Comment}\\textit,
 			keywordstyle=\\color{Keyword},
