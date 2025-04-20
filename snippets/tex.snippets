@@ -9,13 +9,13 @@ snippet dc
 	\\usepackage{hyperref}
 	\\usepackage{fancyhdr}
 	\\usepackage{xcolor}
-	\\usepackage{tcolorbox}
 	\\usepackage{txfonts}
 	\\usepackage{fontspec}
+	\\usepackage{mdframed}
+	\\usepackage{listings}
 	%\\usepackage[UTF8]{ctex}
 	%\\usepackage{graphicx}
 	
-	\\tcbuselibrary{listings,breakable}
 
 	\\definecolor{CodeBg}{HTML}{1E1E27}
 	\\definecolor{Code}{HTML}{CFBFAD}
@@ -74,32 +74,15 @@ snippet dc
 			emphstyle=\\color{Emph}\\textit,
 			basicstyle=\\ttfamily\\footnotesize\\color{Code},
 	}
-	\\tcbset{
-		listing only,
-		listing engine=listings,
-		colback=CodeBg,
-		colframe=CodeBg,
-		left=8mm,
-		lefttitle=2mm,
-		toptitle=2mm,
-		fonttitle=\\bfseries,breakable,
-		title={\\textcolor{red!60!white}{\$\\medbullet\$}\\ \\textcolor{yellow!60!white}{\$\\medbullet\$}\\ \\textcolor{green!60!white}{\$\\medbullet\$}},
+	\\mdfsetup{backgroundcolor=CodeBg,linecolor=gray,outerlinewidth=0pt,
+		innerleftmargin=1cm,
+		%roundcorner=3pt,
+		frametitleaboveskip=14pt,
+		leftmargin=5pt,
+		userdefinedwidth=14cm,
+		frametitle={\\textcolor{red!60!white}{\$\\medbullet\$}\\ \\textcolor{yellow!60!white}{\$\\medbullet\$}\\ \\textcolor{green!60!white}{\$\\medbullet\$}},
 	}
-	\\newtcblisting{TerminalCode}[2]{
-		listing options={
-			language={#1},
-			style=CodeStyle,
-		},
-		#2
-	}
-	\\newtcbinputlisting[use counter=FilePrg, number format=arabic]{\\TerminalFileCode}[3]{
-		listing file={#1},
-		listing options={
-			language={#2},
-			style=CodeStyle,
-		},
-		#3,
-	}
+
 
 
 
@@ -424,7 +407,7 @@ snippet dmo \DeclareMathOperator
 #DOCUMENT
 # \begin{}...\end{}
 snippet bega
-	\\begin{${1:env}}{${2:para}}
+	\\begin{${1:env}}[${2:para}]
 		${0:${VISUAL}}
 	\\end{$1}
 
