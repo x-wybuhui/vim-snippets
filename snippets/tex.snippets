@@ -16,6 +16,7 @@ snippet dc
 	%\\usepackage{graphicx}
 	
 
+	\\definecolor{BoxBg}{HTML}{FDF6E3}
 	\\definecolor{CodeBg}{HTML}{1E1E27}
 	\\definecolor{Code}{HTML}{CFBFAD}
 	\\definecolor{Comment}{HTML}{CD8B00}
@@ -32,9 +33,9 @@ snippet dc
 
 	\\hypersetup{
 		colorlinks=true,
-		linkcolor=blue,
+		linkcolor=Identify,
 		filecolor=magenta,
-		urlcolor=cyan,
+		urlcolor=Comment,
 	}
 	%\\setsansfont{JetBrainsMono}[
 		%Path=./font/,
@@ -60,17 +61,28 @@ snippet dc
 			stringstyle=\\color{String}\\stringbox,
 			%identifierstyle=\\color{Identify},
 			%moredelim=**[s][\\color{String}]{<}{>},
-			directivestyle=\\color{Directive},
+			%directivestyle=\\color{Directive},
 			emphstyle=\\color{Emph}\\textit,
-			basicstyle=\\ttfamily\\footnotesize\\color{Code},
+			basicstyle=\\ttfamily\\tiny\\color{Code},
+	}
+	\\mdfdefinestyle{mdTBox}{
+		backgroundcolor=BoxBg,
+		frametitlebackgroundcolor=yellow!50!black,
+		frametitleaboveskip=5pt,
+		frametitlealignment={\\hspace*{0.30\\linewidth}},
+	}
+	\\mdfdefinestyle{mdCode}{
+		backgroundcolor=CodeBg,
+		innerleftmargin=1cm,
+		leftmargin=5pt,
+		frametitleaboveskip=14pt,
+		frametitle={\\textcolor{red!60!white}{\$\\medbullet\$}\\ \\textcolor{yellow!60!white}{\$\\medbullet\$}\\ \\textcolor{green!60!white}{\$\\medbullet\$}},
 	}
 	\\mdfsetup{backgroundcolor=CodeBg,linecolor=gray,outerlinewidth=0pt,
-		innerleftmargin=1cm,
+		linecolor=gray,
+		outerlinewidth=0pt,
+		align=center,
 		%roundcorner=3pt,
-		frametitleaboveskip=14pt,
-		leftmargin=5pt,
-		userdefinedwidth=14cm,
-		frametitle={\\textcolor{red!60!white}{\$\\medbullet\$}\\ \\textcolor{yellow!60!white}{\$\\medbullet\$}\\ \\textcolor{green!60!white}{\$\\medbullet\$}},
 	}
 
 
