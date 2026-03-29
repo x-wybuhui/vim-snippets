@@ -1,0 +1,45 @@
+# document start 
+snippet doc 
+	#import "note-theme.typ": theme
+	#show: code-theme
+
+	#set document(
+	  title: "${1:title}",
+	  author: "${2:author}",
+	)
+
+
+	#set page(paper: "a4")
+	#title[${1:title}]
+	#align(center +  horizon)[
+		${2:author} \\
+		#link("mailto:${3:x@wybuhui.com}")
+		#image("${4:image}", width: 30%)
+	]
+
+
+	#pagebreak()
+	#counter(page).update(1)
+
+	#let indent = h(2em)
+	#set par(first-line-indent: 2em)
+	#set page(numbering: "1")
+	${0}
+
+snippet table 
+	#figure(
+	  table(
+		columns: (${1:auto}),
+		align: (left + horizon, left + horizon , center + horizon),
+		fill: (x, y) =>
+		  if y == 0 { green.lighten(60%) },
+		table.header(
+		  ${2:header}
+		),
+		${0}
+	  ),
+	  caption: "${3:title}"
+	)
+	
+
+		
